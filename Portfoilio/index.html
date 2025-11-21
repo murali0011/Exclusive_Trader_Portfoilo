@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Trader | Global Import & Export Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a365d00;
+            --secondary: #f4c839;
+            --accent: #2d3748;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --text: #4a5568;
+            --success: #38a169;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 75px;
+            width: auto;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        
+        .logo-caption {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.2;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+        
+        /* Mobile Navigation Styles */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: rgba(26, 54, 93, 0.98);
+            z-index: 2000;
+            transition: left 0.3s ease-in-out;
+            padding: 80px 20px 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-nav.active {
+            left: 0;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav ul li {
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+        
+        .mobile-nav ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 10px 0;
+            transition: color 0.3s;
+        }
+        
+        .mobile-nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Hero Section - Fixed to fit whole page with video background */
+        .hero {
+            position: relative;
+            color: white;
+            padding: 180px 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(26, 54, 93, 0.018), rgba(26, 54, 93, 0));
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin: 0 auto 30px;
+            max-width: 700px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e6c12e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Collapsible About Content */
+        .about-collapsed {
+            max-height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .about-collapsed::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(transparent, var(--light));
+        }
+        
+        /* Leadership Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-image-container {
+            position: relative;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            flex-shrink: 0;
+        }
+        
+        .member-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .animated-border {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--secondary),
+                var(--dark),
+                var(--secondary)
+            );
+            animation: rotate 3s linear infinite;
+            z-index: 1;
+        }
+        
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            background: white;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+            z-index: 1;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .member-info {
+            padding: 25px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .member-info h3 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+        
+        .member-info .role {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .member-info p {
+            color: var(--text);
+            line-height: 1.6;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        /* Products Section */
+        .products-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            background-color: white;
+            border: 1px solid var(--secondary);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .view-more-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .info-icon {
+            background-color: var(--secondary);
+            color: var(--light);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: #092646;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #092646;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--dark);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgb(4, 33, 66);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--light);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #092646;
+            color: #092646;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                padding: 15px 0;
+                justify-content: space-between;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .logo-caption {
+                text-align: left;
+                margin-left: 10px;
+                margin-top: 0;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .member-image-container {
+                height: 280px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu {
+                display: block;
+                position: static;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .hero {
+                padding: 150px 0;
+                min-height: 100vh;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                flex-direction: row;
+                text-align: left;
+            }
+            
+            .logo h1 {
+                margin-left: 0;
+                margin-top: 0;
+            }
+            
+            .logo-text {
+                margin-left: 10px;
+                margin-top: 0;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .member-image-container {
+                height: 250px;
+            }
+            
+            .member-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .animated-border {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .animated-border::before {
+                width: 190px;
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/ET_Logo.png" alt="Exclusive Trader Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Exclusive Trader</h1>
+                    <div class="logo-caption">Your Partner in International Commerce</div>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#leadership">Leadership</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <button class="mobile-nav-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <!-- Overlay for mobile menu -->
+    <div class="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <video autoplay muted loop class="hero-video">
+            <source src="img/home_bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h2>Connecting Global Markets, Delivering Exclusive Value</h2>
+            <p>Exclusive Trader is a premier UK-based import/export company specializing in global trade solutions. We leverage our worldwide network to source and distribute high-quality products across continents.</p>
+            <a href="#contact" class="btn">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Exclusive Trader</h2>
+                <p>From luxury travel to supply chain excellence - our journey of transformation</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-collapsed">
+                        <p>Exclusive Traders (ET) was founded in 2010, initially operating as Exclusive Travel, a key provider of premium travel and hospitality services within the competitive London luxury sector.</p>
+                        
+                        <p>For over a decade, this dedicated focus granted us deep, invaluable operational knowledge of the UK market. We gained first-hand insight into the intense operational demands and the high-level quality required to maintain a seamless, five-star guest experience.</p>
+                        
+                        <p>This foundational experience revealed a critical, chronic issue: a supply chain gap for consistently reliable, high-quality essential luxury and operational items, coupled with unnecessary intermediary costs.</p>
+                        
+                        <p>We responded by undergoing a strategic transformation, pivoting ET to become a specialized B2B sourcing and procurement partner dedicated to solving this very problem. Our new mission is to deliver Supply Chain Certainty.</p>
+                    </div>
+                    <a href="about.html" class="btn" style="margin-top: 20px;">Read More</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80" alt="Global Trade">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section -->
+    <section id="leadership" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Leadership Team</h2>
+                <p>Meet the visionaries driving Exclusive Trader's global success</p>
+            </div>
+            <div class="team-grid">
+                <!-- Hymat Ali - First -->
+                <div class="team-member">
+                    <div class="member-image-container">
+                        <div class="animated-border"></div>
+                        <div class="member-image">
+                            <img src="img/Hymat.jpg" alt="Hymat Ali">
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Mr. Himyat Ali</h3>
+                        <div class="role">Director</div>
+                        <p>Hymat brings extensive expertise in supply chain management and international business development with key strengths in strategic planning, market expansion, logistics optimization, partnership development, financial management, and team leadership.</p>
+                    </div>
+                </div>
+                <!-- Chander - Second -->
+                <div class="team-member">
+                    <div class="member-image-container">
+                        <div class="animated-border"></div>
+                        <div class="member-image">
+                            <img src="img/Chander.jpg" alt="Chander">
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Mr. G. Chandar</h3>
+                        <div class="role">Director</div>
+                        <p>He brings expertise in real estate, agriculture, IT, and supply chain management. Having worked with international partners across MENA and USA markets, he plays a key role in driving operational excellence, building partnerships, and expanding Exclusive Trader's global presence.</p>
+                    </div>
+                </div>
+                <!-- Jahnavi - Third -->
+                <div class="team-member">
+                    <div class="member-image-container">
+                        <div class="animated-border"></div>
+                        <div class="member-image">
+                            <img src="img/Jahnavi.jpg" alt="Jahnavi">
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h3>Ms. P. Jahnavi</h3>
+                        <div class="role">IT Head</div>
+                        <p>Jahnavi leads our technology initiatives with expertise in system architecture, cybersecurity, digital transformation, data analytics, cloud infrastructure, and IT project management. She ensures our technological infrastructure supports global trade operations efficiently and securely.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive trade solutions tailored to your business needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h3>Global Import/Export</h3>
+                    <p>End-to-end solutions for international trade, from sourcing to delivery.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3>Supply Chain Management</h3>
+                    <p>Optimized logistics and inventory management for seamless operations.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3>Trade Compliance</h3>
+                    <p>Expert navigation of international regulations, tariffs, and documentation.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Market Analysis</h3>
+                    <p>Data-driven insights to identify opportunities and mitigate risks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Products</h2>
+                <p>Diverse range of high-quality products for global markets</p>
+            </div>
+            <div class="products-filter">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="food">Food & Beverages</button>
+                <button class="filter-btn" data-filter="consumer">Consumer Goods</button>
+                <button class="filter-btn" data-filter="specialty">Specialty Products</button>
+            </div>
+            <div class="products-grid">
+                <!-- First 8 products (visible by default) -->
+                <div class="product-card" data-category="food">
+                    <div class="product-image">
+                        <img src="https://www.adm.com/globalassets/products--services/human-nutrition/products/edible--specialty-oils/adobestock_276824843.jpeg" alt="Edible Oil Refining">
+                    </div>
+                    <div class="product-info">
+                        <h3>Edible Oil Refining</h3>
+                        <p>Premium quality refined edible oils for culinary and industrial use.</p>
+                    </div>
+                </div>
+                <div class="product-card" data-category="food">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Rice">
+                    </div>
+                    <div class="product-info">
+                        <h3>Rice</h3>
+                        <p>High-quality rice varieties from premium growing regions worldwide.</p>
+                    </div>
+                </div>
+                <div class="product-card" data-category="food">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Pulses">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pulses</h3>
+                        <p>Nutritious pulses including lentils, chickpeas, and beans.</p>
+                    </div>
+                </div>
+                <div class="product-card" data-category="food">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Fruits">
+                    </div>
+                    <div class="product-info">
+                        <h3>Fruits</h3>
+                        <p>Fresh and exotic fruits sourced from the best orchards globally.</p>
+                    </div>
+                </div>
+                <div class="product-card" data-category="food">
+                    <div class="product-image">
+                        <img src="https://cdn.britannica.com/17/196817-159-9E487F15/vegetables.jpg" alt="Vegetables">
+                    </div>
+                    <div class="product-info">
+                        <h3>Vegetables</h3>
+                        <p>Fresh, organic vegetables for retail and wholesale markets.</p>
+                    </div>
+                </div>
+                <div class="product-card" data-category="consumer">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Gadgets">
+                    </div>
+                    <div class="product-info">
+                        <h3>Gadgets</h3>
+                        <p>Latest electronic gadgets and smart devices from leading brands.</p>
+                    </div>
+                </div>
+                <div class="product-card" data-category="food">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1575377427642-087cf684f29d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Chocolate">
+                    </div>
+                    <div class="product-info">
+                        <h3>Chocolate</h3>
+                        <p>Premium quality chocolates and cocoa products from finest sources.</p>
+                    </div>
+                </div>
+                <div class="product-card" data-category="food">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Beverages">
+                    </div>
+                    <div class="product-info">
+                        <h3>Beverages</h3>
+                        <p>Refreshing beverages including juices, soft drinks, and health drinks.</p>
+                    </div>
+                </div>
+                
+                <!-- Additional 7 products (hidden by default) -->
+                <div class="product-card hidden-product" data-category="specialty">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Perfume">
+                    </div>
+                    <div class="product-info">
+                        <h3>Perfume</h3>
+                        <p>Luxury fragrances and perfumes from renowned international brands.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden-product" data-category="specialty">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Flowers">
+                    </div>
+                    <div class="product-info">
+                        <h3>Flowers</h3>
+                        <p>Fresh cut flowers and floral arrangements for all occasions.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden-product" data-category="food">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Spices">
+                    </div>
+                    <div class="product-info">
+                        <h3>Spices</h3>
+                        <p>Authentic spices and herbs from traditional growing regions.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden-product" data-category="consumer">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Clothing">
+                    </div>
+                    <div class="product-info">
+                        <h3>Clothing</h3>
+                        <p>Fashionable clothing and apparel for men, women, and children.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden-product" data-category="food">
+                    <div class="product-image">
+                        <img src="https://www.nutraj.com/cdn/shop/files/9-healthy-and-delicious-dry-fruits-featured-image-450300-mobile-view.jpg?v=1688041386" alt="Dry Fruits">
+                    </div>
+                    <div class="product-info">
+                        <h3>Dry Fruits</h3>
+                        <p>Premium quality dry fruits and nuts for health-conscious consumers.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden-product" data-category="food">
+                    <div class="product-image">
+                        <img src="https://domf5oio6qrcr.cloudfront.net/medialibrary/8468/Tea.jpg" alt="Tea">
+                    </div>
+                    <div class="product-info">
+                        <h3>Tea</h3>
+                        <p>Fine quality teas from renowned tea gardens around the world.</p>
+                    </div>
+                </div>
+                <div class="product-card hidden-product" data-category="food">
+                    <div class="product-image">
+                        <img src="https://www.hayesmeats.com/wp-content/uploads/2018/11/test2.jpg" alt="Meat">
+                    </div>
+                    <div class="product-info">
+                        <h3>Meat</h3>
+                        <p>Premium quality meat products meeting international standards.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more-container">
+                <button class="btn" id="viewMoreBtn">View All Products</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch to discuss your import/export needs</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's Start a Conversation</h3>
+                    <p>We're here to answer any questions about our services and explore how we can support your global trade objectives.</p>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Our Location</h4>
+                            <p>1st Floor, 8 Quary Wharf, Abbey Road, Barking, London, IG11 7BZ.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>Phone Number</h4>
+                            <p>+44 7875 443675</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email Address</h4>
+                            <p>Fmcg@excslusivetrader.co.uk</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Working Hours</h4>
+                            <p>Monday - Friday: 9:00 - 18:00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Exclusive Trader</h3>
+                    <p>Your trusted partner in global import and export solutions. Connecting markets, delivering value.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/110183309"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com/exclusive52584"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61583972735457"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/exclusive_trader_london/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Global Import/Export</a></li>
+                        <li><a href="#">Supply Chain Management</a></li>
+                        <li><a href="#">Trade Compliance</a></li>
+                        <li><a href="#">Market Analysis</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 1st Floor, 8 Quary Wharf, Abbey Road, Barking, London, IG11 7BZ.</li>
+                        <li><i class="fas fa-phone"></i> +44 7875 443675</li>
+                        <li><i class="fas fa-envelope"></i> Fmcg@excslusivetrader.co.uk</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Exclusive Trader. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle with Slide Animation
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        const overlay = document.querySelector('.overlay');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        mobileNavClose.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        overlay.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('nav a, .mobile-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only handle same-page anchor links (not external page links)
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetId = href;
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Product Filtering and View More Logic
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        const hiddenProducts = document.querySelectorAll('.hidden-product');
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        
+        let currentFilter = 'all';
+        let allProductsVisible = false;
+        
+        // Initially hide additional products
+        hiddenProducts.forEach(product => {
+            product.style.display = 'none';
+        });
+        
+        // Filter functionality
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                currentFilter = this.getAttribute('data-filter');
+                
+                // Reset view more state when changing filter
+                allProductsVisible = false;
+                viewMoreBtn.textContent = 'View All Products';
+                
+                // Apply filter
+                applyFilter(currentFilter, allProductsVisible);
+            });
+        });
+        
+        // View More functionality
+        viewMoreBtn.addEventListener('click', function() {
+            allProductsVisible = !allProductsVisible;
+            
+            if (allProductsVisible) {
+                viewMoreBtn.textContent = 'Show Less Products';
+            } else {
+                viewMoreBtn.textContent = 'View All Products';
+            }
+            
+            // Apply current filter with new view state
+            applyFilter(currentFilter, allProductsVisible);
+        });
+        
+        // Function to apply filter and view state
+        function applyFilter(filterValue, showAll) {
+            productCards.forEach(card => {
+                if (filterValue === 'all') {
+                    // For "All Products" filter
+                    if (showAll) {
+                        // Show all products
+                        card.style.display = 'block';
+                    } else {
+                        // Show only first 8 products
+                        if (card.classList.contains('hidden-product')) {
+                            card.style.display = 'none';
+                        } else {
+                            card.style.display = 'block';
+                        }
+                    }
+                } else {
+                    // For category filters
+                    if (card.getAttribute('data-category') === filterValue) {
+                        // Show products from selected category
+                        if (showAll) {
+                            // Show all products from this category
+                            card.style.display = 'block';
+                        } else {
+                            // Show only first few products from this category
+                            // For simplicity, we'll show all category products when filtered
+                            card.style.display = 'block';
+                        }
+                    } else {
+                        // Hide products not in selected category
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+        
+        // Form Submission - WhatsApp Integration
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // WhatsApp phone number
+            const whatsappNumber = '9553774933';
+            
+            // Create the message text
+            const whatsappMessage = `Hello Exclusive Trader,%0A%0AHere are my contact details:%0A%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ASubject: ${subject}%0AMessage: ${message}%0A%0AI would like to know more about your services.`;
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(whatsappURL, '_blank');
+            
+            // Reset the form
+            this.reset();
+        });
+        
+        // Header Background on Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(26, 54, 93, 0.95)';
+            } else {
+                header.style.backgroundColor = 'var(--primary)';
+            }
+        });
+    </script>
+</body>
+</html>

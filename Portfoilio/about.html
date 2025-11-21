@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Exclusive Trader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a365d00;
+            --secondary: #f4c839;
+            --accent: #2d3748;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --text: #4a5568;
+            --success: #38a169;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 75px;
+            width: auto;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        
+        .logo-caption {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.2;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: white;
+        }
+        
+        /* Mobile Navigation Styles */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: rgba(26, 54, 93, 0.98);
+            z-index: 2000;
+            transition: left 0.3s ease-in-out;
+            padding: 80px 20px 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-nav.active {
+            left: 0;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav ul li {
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+        }
+        
+        .mobile-nav ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 10px 0;
+            transition: color 0.3s;
+        }
+        
+        .mobile-nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-nav-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1500;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background-color: #e6c12e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-btn i {
+            margin-right: 8px;
+        }
+        
+        /* Hero Section - Fixed to fit whole page with video background */
+        .about-hero {
+            position: relative;
+            color: white;
+            padding: 180px 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(26, 54, 93, 0.018), rgba(26, 54, 93, 0));
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .about-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .about-hero p {
+            font-size: 1.2rem;
+            margin: 0 auto 30px;
+            max-width: 700px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e6c12e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
+        }
+        
+        /* About Content */
+        .about-content {
+            padding: 80px 0;
+        }
+        
+        .about-section {
+            margin-bottom: 60px;
+        }
+        
+        .about-section h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .about-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .portfolio-segments {
+            margin-top: 30px;
+        }
+        
+        .portfolio-segments h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .segment-list {
+            list-style-type: none;
+            margin-left: 20px;
+        }
+        
+        .segment-list li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .segment-list li::before {
+            content: '•';
+            color: var(--secondary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: rgb(7, 3, 40);
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #092646;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--dark);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgb(4, 33, 66);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--light);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgb(40, 69, 94);
+            color: #213b57;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                padding: 15px 0;
+                justify-content: space-between;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .logo-caption {
+                text-align: left;
+                margin-left: 10px;
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu {
+                display: block;
+                position: static;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            .about-hero {
+                padding: 150px 0;
+                min-height: 100vh;
+            }
+            
+            .about-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                flex-direction: row;
+                text-align: left;
+            }
+            
+            .logo h1 {
+                margin-left: 0;
+                margin-top: 0;
+            }
+            
+            .logo-text {
+                margin-left: 10px;
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="img/ET_Logo.png" alt="Exclusive Trader Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Exclusive Trader</h1>
+                    <div class="logo-caption">Your Partner in International Commerce</div>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#leadership">Leadership</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <button class="mobile-nav-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#leadership">Leadership</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <!-- Overlay for mobile menu -->
+    <div class="overlay"></div>
+
+    <!-- About Hero Section -->
+    <section class="about-hero">
+        <video autoplay muted loop class="hero-video">
+            <source src="img/About_bg1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>About Exclusive Trader</h1>
+            <p>From luxury travel to supply chain excellence - our journey of transformation</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-section">
+                <h2>Our Journey</h2>
+                <p>Exclusive Traders (ET) was founded in 2010, initially operating as Exclusive Travel, a key provider of premium travel and hospitality services within the competitive London luxury sector.</p>
+                
+                <p>For over a decade, this dedicated focus granted us deep, invaluable operational knowledge of the UK market. We gained first-hand insight into the intense operational demands and the high-level quality required to maintain a seamless, five-star guest experience.</p>
+                
+                <p>This foundational experience revealed a critical, chronic issue: a supply chain gap for consistently reliable, high-quality essential luxury and operational items, coupled with unnecessary intermediary costs.</p>
+            </div>
+            
+            <div class="about-section">
+                <h2>Our Transformation</h2>
+                <p>We responded by undergoing a strategic transformation, pivoting ET to become a specialized B2B sourcing and procurement partner dedicated to solving this very problem. Our new mission is to deliver Supply Chain Certainty.</p>
+                
+                <p>ET leverages its robust global network, built on years of international trade, to secure Direct-to-Manufacturer Access. This crucial model removes the layers of traditional distribution, directly benefiting our clients with superior quality control at the source and guaranteed competitive pricing.</p>
+            </div>
+            
+            <div class="about-section">
+                <h2>Our Portfolio</h2>
+                <p>Our curated portfolio is segmented to directly support premium hospitality operations, eliminating the need to juggle multiple, unreliable suppliers. We focus on three critical areas:</p>
+                
+                <div class="portfolio-segments">
+                    <ul class="segment-list">
+                        <li><strong>Premium Guest FMCG:</strong> Including custom-branded amenities, sustainable consumables, and luxury linens that elevate the visitor experience.</li>
+                        <li><strong>Operational FMCG:</strong> High-volume, high-efficiency commercial cleaning solutions and kitchen essentials for seamless back-of-house operations.</li>
+                        <li><strong>Strategic Raw Materials:</strong> Specialized products for facility maintenance, refurbishment, and enhancing long-term asset value.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="about-section">
+                <h2>Our Commitment</h2>
+                <p>We are fully committed to UK/EU regulatory compliance and transparent, ethical sourcing across all partnerships. We act as a stable, reliable extension of your procurement team.</p>
+                
+                <p>Our guiding principle remains the foundation of our existence: <em>"Where there is need is the answer one can get from us."</em></p>
+                
+                <a href="index.html#contact" class="btn" style="margin-top: 20px;">Partner With Us</a>
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Exclusive Trader</h3>
+                    <p>Your trusted partner in global import and export solutions. Connecting markets, delivering value.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/company/110183309"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com/exclusive52584"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61583972735457"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/exclusive_trader_london/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 1st Floor, 8 Quary Wharf, Abbey Road, Barking, London, IG11 7BZ.</li>
+                        <li><i class="fas fa-phone"></i> +44 7875 443675</li>
+                        <li><i class="fas fa-envelope"></i> Fmcg@excslusivetrader.co.uk</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Exclusive Trader. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle with Slide Animation
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavClose = document.querySelector('.mobile-nav-close');
+        const overlay = document.querySelector('.overlay');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        mobileNavClose.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        overlay.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Smooth Scrolling for Navigation Links (only for same-page anchors)
+        document.querySelectorAll('nav a, .mobile-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Only handle same-page anchor links (not external page links)
+                if (href.includes('#') && !href.includes('.html')) {
+                    e.preventDefault();
+                    
+                    const targetId = href;
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Header Background on Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(26, 54, 93, 0.95)';
+            } else {
+                header.style.backgroundColor = 'var(--primary)';
+            }
+        });
+    </script>
+</body>
+</html>
